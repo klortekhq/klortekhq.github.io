@@ -23,120 +23,111 @@
       <span class="brand-word">KLØRTEK</span>
     </a>
 
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
-      <a href="https://github.com/klortekhq" target="_blank" rel="noreferrer">GitHub ↗</a>
-    </nav>
+    <div class="header-actions">
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#projects" data-i18n="navProjects">Projects</a>
+        <a href="#about" data-i18n="navAbout">About</a>
+        <a href="https://github.com/klortekhq" target="_blank" rel="noreferrer">GitHub ↗</a>
+      </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="es">ES</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
   </header>
 
   <main id="top">
     <section class="hero wrap">
-      <div class="eyebrow reveal">Independent build lab · 2026</div>
-      <h1 class="reveal delay-1">
+      <div class="eyebrow reveal" data-i18n="eyebrow">Independent build lab · 2026</div>
+      <h1 class="reveal delay-1" data-i18n-html="heroTitle">
         Somewhere between<br />
         <span class="accent">code</span> and <span class="accent alt">chaos.</span>
       </h1>
-      <p class="hero-copy reveal delay-2">
+      <p class="hero-copy reveal delay-2" data-i18n-html="heroCopy">
         Building products, systems and questionable ideas.<br />
         Klørtek is where the ideas escape.
       </p>
       <div class="hero-actions reveal delay-3">
-        <a class="button primary" href="#projects">Explore projects</a>
-        <a class="button ghost" href="https://github.com/klortekhq" target="_blank" rel="noreferrer">Open GitHub ↗</a>
+        <a class="button primary" href="#projects" data-i18n="explore">Explore projects</a>
+        <a class="button ghost" href="https://github.com/klortekhq" target="_blank" rel="noreferrer" data-i18n="openGithub">Open GitHub ↗</a>
       </div>
 
       <div class="signal reveal delay-4" aria-label="Klørtek signal">
         <span class="signal-dot"></span>
-        <span>BUILDING / BREAKING / REBUILDING</span>
+        <span data-i18n="signal">BUILDING / BREAKING / REBUILDING</span>
       </div>
     </section>
 
     <section id="projects" class="projects wrap">
       <div class="section-head">
         <div>
-          <span class="kicker">01 / SELECTED WORK</span>
-          <h2>Things that made it out.</h2>
+          <span class="kicker" data-i18n="selectedWork">01 / SELECTED WORK</span>
+          <h2 data-i18n="thingsOut">Things that made it out.</h2>
         </div>
-        <p>Different products. Same obsession: remove friction, keep control, make it feel finished.</p>
+        <p data-i18n="projectsIntro">Different products. Same obsession: remove friction, keep control, make it feel finished.</p>
       </div>
 
       <div class="project-grid">
         <article class="project project-nirea reveal-card">
           <div class="project-topline">
-            <span class="status active"><i></i> Active development</span>
+            <span class="status active"><i></i><span data-i18n="activeDev">Active development</span></span>
             <span class="project-index">001</span>
           </div>
           <div class="project-body">
             <div class="project-name">NIREA</div>
-            <h3>Human performance,<br />understood.</h3>
-            <p>
-              A science-first performance platform that connects training, recovery,
-              health and athlete data into one coherent system.
-            </p>
+            <h3 data-i18n-html="nireaTitle">Human performance,<br />understood.</h3>
+            <p data-i18n="nireaCopy">A science-first performance platform that connects training, recovery, health and athlete data into one coherent system.</p>
           </div>
           <div class="project-footer">
-            <span>Training · Recovery · Health · Intelligence</span>
+            <span data-i18n="nireaTags">Training · Recovery · Health · Intelligence</span>
             <span class="arrow">↗</span>
           </div>
         </article>
 
         <article class="project project-velora reveal-card">
           <div class="project-topline">
-            <span class="status active"><i></i> Active development</span>
+            <span class="status active"><i></i><span data-i18n="activeDev">Active development</span></span>
             <span class="project-index">002</span>
           </div>
           <div class="project-body">
             <div class="project-name">VELORA</div>
-            <h3>Your media.<br />Your server.</h3>
-            <p>
-              A modern open-source Jellyfin experience across mobile, TV and the web,
-              built around direct playback, speed and a clean cinematic interface.
-            </p>
+            <h3 data-i18n-html="veloraTitle">Your media.<br />Your server.</h3>
+            <p data-i18n="veloraCopy">A modern open-source Jellyfin experience across mobile, TV and the web, built around direct playback, speed and a clean cinematic interface.</p>
           </div>
           <div class="project-footer">
-            <span>Jellyfin · Mobile · TV · Open source</span>
+            <span data-i18n="veloraTags">Jellyfin · Mobile · TV · Open source</span>
             <span class="arrow">↗</span>
           </div>
         </article>
 
         <article class="project project-kudori reveal-card compact">
           <div class="project-topline">
-            <span class="status building"><i></i> Building</span>
+            <span class="status building"><i></i><span data-i18n="building">Building</span></span>
             <span class="project-index">003</span>
           </div>
           <div class="project-body">
             <div class="project-name">KUDORI</div>
-            <h3>Your work.<br />Their support.</h3>
-            <p>
-              A simpler creator-support platform for tips, memberships and community.
-            </p>
+            <h3 data-i18n-html="kudoriTitle">Your work.<br />Their support.</h3>
+            <p data-i18n="kudoriCopy">A simpler creator-support platform for tips, memberships and community.</p>
           </div>
           <div class="project-footer">
-            <span>Creators · Payments · Memberships</span>
+            <span data-i18n="kudoriTags">Creators · Payments · Memberships</span>
             <span class="arrow">↗</span>
           </div>
         </article>
 
-        <a class="project project-tidako reveal-card compact link-card"
-           href="https://github.com/klortekhq/Tidako"
-           target="_blank"
-           rel="noreferrer"
-           aria-label="Open Tidako on GitHub">
+        <a class="project project-tidako reveal-card compact link-card" href="https://github.com/klortekhq/Tidako" target="_blank" rel="noreferrer" aria-label="Open Tidako on GitHub">
           <div class="project-topline">
-            <span class="status building"><i></i> Building</span>
+            <span class="status building"><i></i><span data-i18n="building">Building</span></span>
             <span class="project-index">004</span>
           </div>
           <div class="project-body">
             <div class="project-name">TIDAKO</div>
-            <h3>Your game library.<br />Press play.</h3>
-            <p>
-              A RomM-first open-source gaming client built around managed cache,
-              integrated emulation and seamless saves.
-            </p>
+            <h3 data-i18n-html="tidakoTitle">Your game library.<br />Press play.</h3>
+            <p data-i18n="tidakoCopy">A RomM-first open-source gaming client built around managed cache, integrated emulation and seamless saves.</p>
           </div>
           <div class="project-footer">
-            <span>RomM · Emulation · Open source</span>
+            <span data-i18n="tidakoTags">RomM · Emulation · Open source</span>
             <span class="arrow">↗</span>
           </div>
         </a>
@@ -144,18 +135,16 @@
     </section>
 
     <section class="manifesto wrap">
-      <span class="kicker">02 / OPERATING SYSTEM</span>
+      <span class="kicker" data-i18n="operatingSystem">02 / OPERATING SYSTEM</span>
       <div class="manifesto-grid">
-        <p class="big-quote">
-          Build it.<br />
-          Break it.<br />
-          <span>Make it better.</span>
+        <p class="big-quote" data-i18n-html="manifesto">
+          Build it.<br />Break it.<br /><span>Make it better.</span>
         </p>
         <div class="principles">
-          <div><span>01</span><p>Useful before impressive.</p></div>
-          <div><span>02</span><p>Control over dependency.</p></div>
-          <div><span>03</span><p>Open where it makes sense.</p></div>
-          <div><span>04</span><p>Polish is part of the product.</p></div>
+          <div><span>01</span><p data-i18n="principle1">Useful before impressive.</p></div>
+          <div><span>02</span><p data-i18n="principle2">Control over dependency.</p></div>
+          <div><span>03</span><p data-i18n="principle3">Open where it makes sense.</p></div>
+          <div><span>04</span><p data-i18n="principle4">Polish is part of the product.</p></div>
         </div>
       </div>
     </section>
@@ -163,18 +152,12 @@
     <section id="about" class="about wrap">
       <div class="section-head">
         <div>
-          <span class="kicker">03 / ABOUT</span>
-          <h2>Klørtek is where<br />the ideas escape.</h2>
+          <span class="kicker" data-i18n="aboutKicker">03 / ABOUT</span>
+          <h2 data-i18n-html="aboutTitle">Klørtek is where<br />the ideas escape.</h2>
         </div>
         <div class="about-copy">
-          <p>
-            Not a corporation. Not a pitch deck. A place for products, experiments,
-            code and systems that were interesting enough to build for real.
-          </p>
-          <p>
-            Some become open-source projects. Some become products. Some probably
-            should have stayed as ideas.
-          </p>
+          <p data-i18n="aboutCopy1">Not a corporation. Not a pitch deck. A place for products, experiments, code and systems that were interesting enough to build for real.</p>
+          <p data-i18n="aboutCopy2">Some become open-source projects. Some become products. Some probably should have stayed as ideas.</p>
         </div>
       </div>
 
@@ -185,11 +168,11 @@
         </div>
         <div class="terminal-body">
           <p><span class="prompt">$</span> whoami</p>
-          <p class="output">builder / creator / problem-maker</p>
+          <p class="output" data-i18n="terminalWho">builder / creator / problem-maker</p>
           <p><span class="prompt">$</span> ls projects</p>
           <p class="output">nirea&nbsp;&nbsp; velora&nbsp;&nbsp; kudori&nbsp;&nbsp; tidako</p>
           <p><span class="prompt">$</span> status</p>
-          <p class="output green">still building_</p>
+          <p class="output green" data-i18n="terminalStatus">still building_</p>
         </div>
       </div>
     </section>
@@ -201,8 +184,8 @@
       <span class="muted">© 2026</span>
     </div>
     <div class="footer-links">
-      <a href="#projects">Projects</a>
-      <a href="#about">About</a>
+      <a href="#projects" data-i18n="navProjects">Projects</a>
+      <a href="#about" data-i18n="navAbout">About</a>
       <a href="https://github.com/klortekhq" target="_blank" rel="noreferrer">GitHub ↗</a>
     </div>
   </footer>
