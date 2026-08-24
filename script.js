@@ -19,7 +19,7 @@ const translations = {
     veloraTitle: "Your media.<br />Your server.",
     veloraCopy: "A modern open-source Jellyfin experience across mobile, TV and the web, built around direct playback, speed and a clean cinematic interface.",
     veloraTags: "Jellyfin · Mobile · TV · Open source",
-    kudoriTitle: "Your work.<br />Their support.",
+    kudoriTitle: "Your work.<br />Their support.</h3>",
     kudoriCopy: "A simpler creator-support platform for tips, memberships and community.",
     kudoriTags: "Creators · Payments · Memberships",
     tidakoTitle: "Your game library.<br />Press play.",
@@ -79,7 +79,7 @@ const translations = {
   }
 };
 
-function applyLanguage(lang) {
+function applyLanguage(lang, persist = false) {
   const selected = translations[lang] ? lang : "en";
   const dict = translations[selected];
 
@@ -98,9 +98,38 @@ function applyLanguage(lang) {
     button.setAttribute("aria-pressed", String(active));
   });
 
-  try {
-    localStorage.setItem("klortek-lang", selected);
-  } catch (_) {}
+  if (persist) {
+    try {
+      localStorage.setItem("klortek-lang", selected);
+    } catch (_) {}
+  }
+}
+
+function detectDefaultLanguage() {
+  const spanishRegions = new Set([
+    "ES", "MX", "AR", "BO", "CL", "CO", "CR", "CU", "DO", "EC", "SV",
+    "GQ", "GT", "HN", "NI", "PA", "PY", "PE", "PR", "UY", "VE"
+  ]);
+
+  const locales = [
+    ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+    navigator.language,
+    Intl.DateTimeFormat().resolvedOptions().locale
+  ].filter(Boolean);
+
+  for (const locale of locales) {
+    try {
+      const region = new Intl.Locale(locale).region;
+      if (region && spanishRegions.has(region.toUpperCase())) return "es";
+      if (region) return "en";
+    } catch (_) {
+      const match = String(locale).match(/[-_]([A-Za-z]{2})\b/);
+      if (match && spanishRegions.has(match[1].toUpperCase())) return "es";
+      if (match) return "en";
+    }
+  }
+
+  return locales.some((locale) => String(locale).toLowerCase().startsWith("es")) ? "es" : "en";
 }
 
 const observer = new IntersectionObserver(
@@ -118,7 +147,7 @@ const observer = new IntersectionObserver(
 document.querySelectorAll(".reveal-card").forEach(el => observer.observe(el));
 
 document.querySelectorAll("[data-lang]").forEach((button) => {
-  button.addEventListener("click", () => applyLanguage(button.dataset.lang));
+  button.addEventListener("click", () => applyLanguage(button.dataset.lang, true));
 });
 
 let savedLanguage = null;
@@ -126,5 +155,4 @@ try {
   savedLanguage = localStorage.getItem("klortek-lang");
 } catch (_) {}
 
-const browserLanguage = (navigator.language || "en").toLowerCase().startsWith("es") ? "es" : "en";
-applyLanguage(savedLanguage || browserLanguage);
+applyLanguage(savedLanguage || detectDefaultLanguage());
