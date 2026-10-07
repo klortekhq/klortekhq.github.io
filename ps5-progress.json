@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-07T20:45:05.647437+00:00",
+  "updated_at": "2026-10-07T20:54:27.782319+00:00",
   "basis": "Conservative verified milestone index; not total feature completion. Unreviewed work receives no additional credit.",
   "milestones": [
     {
@@ -38,7 +38,9 @@
       "status_es": "Prototipo de mapa y mando probado en PS5. La corrección de arranque de materiales pasa la prueba nativa local; validación en PS5, sonido y fidelidad pendientes.",
       "status_en": "Map and controller prototype tested on PS5. The material startup correction passes native shader checks on host; PS5 validation, audio and fidelity remain pending.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/XOMBIE-NATIVE-PS5"
+      "github": "https://github.com/klortekhq/XOMBIE-NATIVE-PS5",
+      "display_name": "XOMBIE",
+      "tagline_es": "PROTOCOLO Z // La última ronda no existe."
     },
     {
       "name": "RESKATE-NATIVE-PS5",
@@ -46,7 +48,9 @@
       "status_es": "Recuperación del mando y codec probados en local (2/2). Juego nativo y prueba física pendientes.",
       "status_en": "Controller recovery and codec tested on host (2/2). Native game runtime and hardware validation remain pending.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/RESKATE-NATIVE-PS5"
+      "github": "https://github.com/klortekhq/RESKATE-NATIVE-PS5",
+      "display_name": "RE:SKATE",
+      "tagline_es": "SIN JAULAS // La ciudad es tu línea."
     },
     {
       "name": "D-INFERNO-NATIVE-PS5",
@@ -54,7 +58,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/D-INFERNO-NATIVE-PS5"
+      "github": "https://github.com/klortekhq/D-INFERNO-NATIVE-PS5",
+      "display_name": "D·INFERNO",
+      "tagline_es": "NUEVE CÍRCULOS // Sólo queda descender."
     },
     {
       "name": "FAMILYGUY-NATIVE-PS5",
@@ -62,7 +68,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/FAMILYGUY-NATIVE-PS5"
+      "github": "https://github.com/klortekhq/FAMILYGUY-NATIVE-PS5",
+      "display_name": "FAMILY GUY · ENHANCED",
+      "tagline_es": "MULTIVERSO // Esto no estaba en el guion."
     },
     {
       "name": "HOME-WEBMAN-PS5",
@@ -70,7 +78,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/HOME-WEBMAN-PS5"
+      "github": "https://github.com/klortekhq/HOME-WEBMAN-PS5",
+      "display_name": "KLØR HOME",
+      "tagline_es": "ACCESO // Cada mundo, una puerta."
     },
     {
       "name": "KLOR-Engine",
@@ -79,7 +89,9 @@
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
       "github": "https://github.com/klortekhq/KLOR-Engine",
-      "readme_status": "No published main to update"
+      "readme_status": "No published main to update",
+      "display_name": "KLØR ENGINE",
+      "tagline_es": "NÚCLEO // Aquí nacen los mundos."
     },
     {
       "name": "LAN-NATIVES-PS5",
@@ -87,7 +99,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/LAN-NATIVES-PS5"
+      "github": "https://github.com/klortekhq/LAN-NATIVES-PS5",
+      "display_name": "KLØR LINK",
+      "tagline_es": "SIN FRONTERAS // La partida encuentra el camino."
     },
     {
       "name": "NATIVE-EMUS-PS5",
@@ -95,7 +109,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/NATIVE-EMUS-PS5"
+      "github": "https://github.com/klortekhq/NATIVE-EMUS-PS5",
+      "display_name": "KLØR NATIVE",
+      "tagline_es": "MEMORIA VIVA // Ningún mundo se pierde."
     },
     {
       "name": "NATIVE-FUTURAMA-PS5",
@@ -103,7 +119,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/NATIVE-FUTURAMA-PS5"
+      "github": "https://github.com/klortekhq/NATIVE-FUTURAMA-PS5",
+      "display_name": "FUTURAMA · ENHANCED",
+      "tagline_es": "AÑO 3000 // Entrega pendiente."
     },
     {
       "name": "NATIVE-HALFLIFE-S",
@@ -111,7 +129,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/NATIVE-HALFLIFE-S"
+      "github": "https://github.com/klortekhq/NATIVE-HALFLIFE-S",
+      "display_name": "HALF-LIFE · NATIVE",
+      "tagline_es": "RESONANCIA // No era una prueba."
     },
     {
       "name": "NATIVE-SIMPSONS-PS5",
@@ -119,7 +139,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/NATIVE-SIMPSONS-PS5"
+      "github": "https://github.com/klortekhq/NATIVE-SIMPSONS-PS5",
+      "display_name": "SPRINGFIELD · ENHANCED",
+      "tagline_es": "RUTA 742 // La ciudad nunca aprende."
     },
     {
       "name": "SERVER-EMUS-PS5",
@@ -127,7 +149,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/SERVER-EMUS-PS5"
+      "github": "https://github.com/klortekhq/SERVER-EMUS-PS5",
+      "display_name": "KLØR RELAY",
+      "tagline_es": "SEÑAL // El origen está conectado."
     },
     {
       "name": "TEKKEN3MOD-NATIVE-PS5",
@@ -135,7 +159,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/TEKKEN3MOD-NATIVE-PS5"
+      "github": "https://github.com/klortekhq/TEKKEN3MOD-NATIVE-PS5",
+      "display_name": "TEKKEN 3 · EXPANDED",
+      "tagline_es": "ROUND ZERO // El golpe vuelve."
     },
     {
       "name": "ASSASSINS-NATIVE-PS5",
@@ -144,7 +170,9 @@
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
       "github": "https://github.com/klortekhq/ASSASSINS-NATIVE-PS5",
-      "readme_status": "No published main to update"
+      "readme_status": "No published main to update",
+      "display_name": "ASSASSINS · ENHANCED",
+      "tagline_es": "MEMORIA // Nada está olvidado."
     },
     {
       "name": "BATTLEFRONT2MOD-PS4",
@@ -152,7 +180,9 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS4 / ecosystem",
-      "github": "https://github.com/klortekhq/BATTLEFRONT2MOD-PS4-PS5-NATIVE"
+      "github": "https://github.com/klortekhq/BATTLEFRONT2MOD-PS4-PS5-NATIVE",
+      "display_name": "BATTLEFRONT II · OVERHAUL",
+      "tagline_es": "FRENTE ABIERTO // La batalla no termina."
     },
     {
       "name": "Velora",
@@ -160,7 +190,19 @@
       "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
       "status_en": "Scope registered; next milestone awaits verification.",
       "platform": "PS5",
-      "github": "https://github.com/klortekhq/Velora"
+      "github": "https://github.com/klortekhq/Velora",
+      "display_name": "VELORA · PS5",
+      "tagline_es": "PLAY // Tu universo, en pantalla."
+    },
+    {
+      "name": "Angelus",
+      "display_name": "ANGELUS",
+      "tagline_es": "SIN CIELO // La meta cambia cuando todo cae.",
+      "percent": 5,
+      "status_es": "Carreras y circuitos destructibles: dirección registrada; prototipo pendiente.",
+      "status_en": "Racing and destructible courses: direction registered; prototype pending.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/Angelus"
     }
   ]
 }
