@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-07T20:16:25.095429+00:00",
+  "updated_at": "2026-10-07T20:45:05.647437+00:00",
   "basis": "Conservative verified milestone index; not total feature completion. Unreviewed work receives no additional credit.",
   "milestones": [
     {
@@ -35,8 +35,8 @@
     {
       "name": "XOMBIE-NATIVE-PS5",
       "percent": 20,
-      "status_es": "Prototipo de mapa y mando probado en PS5. La nueva ruta de materiales está bloqueada en la creación del pipeline; sonido y fidelidad pendientes.",
-      "status_en": "Map and controller prototype tested on PS5. The new material path is blocked at pipeline creation; audio and fidelity remain pending.",
+      "status_es": "Prototipo de mapa y mando probado en PS5. La corrección de arranque de materiales pasa la prueba nativa local; validación en PS5, sonido y fidelidad pendientes.",
+      "status_en": "Map and controller prototype tested on PS5. The material startup correction passes native shader checks on host; PS5 validation, audio and fidelity remain pending.",
       "platform": "PS5",
       "github": "https://github.com/klortekhq/XOMBIE-NATIVE-PS5"
     },
