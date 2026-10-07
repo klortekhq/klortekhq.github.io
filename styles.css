@@ -428,3 +428,10 @@ button { font: inherit; }
   }
   .reveal, .reveal-card { opacity: 1; transform: none; }
 }
+
+/* Verified project milestones */
+#ps5-projects progress{width:100%;height:8px;accent-color:#d64045;margin:12px 0}#ps5-projects h3{overflow-wrap:anywhere;font-size:1.3rem}
+
+html[lang="es"] #ps5-projects p[lang="en"],html[lang="en"] #ps5-projects p[lang="es"]{display:none}
+
+html[lang="es"] #ps5-projects p[lang="en"],html[lang="en"] #ps5-projects p[lang="es"]{display:none}

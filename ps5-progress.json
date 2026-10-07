@@ -1,0 +1,166 @@
+{
+  "updated_at": "2026-10-07T20:16:25.095429+00:00",
+  "basis": "Conservative verified milestone index; not total feature completion. Unreviewed work receives no additional credit.",
+  "milestones": [
+    {
+      "percent": 5,
+      "gate": "Registered scope and repository"
+    },
+    {
+      "percent": 10,
+      "gate": "Initial implementation with passing component tests"
+    },
+    {
+      "percent": 20,
+      "gate": "First interactive console prototype observed"
+    },
+    {
+      "percent": 40,
+      "gate": "Stable core gameplay on console"
+    },
+    {
+      "percent": 60,
+      "gate": "Representative content and audiovisual integration"
+    },
+    {
+      "percent": 80,
+      "gate": "Complete feature set and compatibility validation"
+    },
+    {
+      "percent": 100,
+      "gate": "Release criteria, performance and recovery validated"
+    }
+  ],
+  "projects": [
+    {
+      "name": "XOMBIE-NATIVE-PS5",
+      "percent": 20,
+      "status_es": "Prototipo de mapa y mando probado en PS5. La nueva ruta de materiales está bloqueada en la creación del pipeline; sonido y fidelidad pendientes.",
+      "status_en": "Map and controller prototype tested on PS5. The new material path is blocked at pipeline creation; audio and fidelity remain pending.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/XOMBIE-NATIVE-PS5"
+    },
+    {
+      "name": "RESKATE-NATIVE-PS5",
+      "percent": 10,
+      "status_es": "Recuperación del mando y codec probados en local (2/2). Juego nativo y prueba física pendientes.",
+      "status_en": "Controller recovery and codec tested on host (2/2). Native game runtime and hardware validation remain pending.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/RESKATE-NATIVE-PS5"
+    },
+    {
+      "name": "D-INFERNO-NATIVE-PS5",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/D-INFERNO-NATIVE-PS5"
+    },
+    {
+      "name": "FAMILYGUY-NATIVE-PS5",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/FAMILYGUY-NATIVE-PS5"
+    },
+    {
+      "name": "HOME-WEBMAN-PS5",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/HOME-WEBMAN-PS5"
+    },
+    {
+      "name": "KLOR-Engine",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/KLOR-Engine",
+      "readme_status": "No published main to update"
+    },
+    {
+      "name": "LAN-NATIVES-PS5",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/LAN-NATIVES-PS5"
+    },
+    {
+      "name": "NATIVE-EMUS-PS5",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/NATIVE-EMUS-PS5"
+    },
+    {
+      "name": "NATIVE-FUTURAMA-PS5",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/NATIVE-FUTURAMA-PS5"
+    },
+    {
+      "name": "NATIVE-HALFLIFE-S",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/NATIVE-HALFLIFE-S"
+    },
+    {
+      "name": "NATIVE-SIMPSONS-PS5",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/NATIVE-SIMPSONS-PS5"
+    },
+    {
+      "name": "SERVER-EMUS-PS5",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/SERVER-EMUS-PS5"
+    },
+    {
+      "name": "TEKKEN3MOD-NATIVE-PS5",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/TEKKEN3MOD-NATIVE-PS5"
+    },
+    {
+      "name": "ASSASSINS-NATIVE-PS5",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/ASSASSINS-NATIVE-PS5",
+      "readme_status": "No published main to update"
+    },
+    {
+      "name": "BATTLEFRONT2MOD-PS4",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS4 / ecosystem",
+      "github": "https://github.com/klortekhq/BATTLEFRONT2MOD-PS4"
+    },
+    {
+      "name": "Velora",
+      "percent": 5,
+      "status_es": "Alcance registrado; siguiente hito pendiente de verificación.",
+      "status_en": "Scope registered; next milestone awaits verification.",
+      "platform": "PS5",
+      "github": "https://github.com/klortekhq/Velora"
+    }
+  ]
+}
