@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071219">
+  <meta name="description" content="Diagnóstico BLE de solo lectura para BH Boxster Plus II. Inventario GATT, lectura FTMS y servicios propietarios y exportación local.">
+  <title>BH Boxster II · Diagnóstico BLE</title>
+  <style>
+    :root{color-scheme:dark;--bg:#071219;--panel:#10222c;--panel2:#142d39;--line:#29414b;--text:#eaf4f6;--muted:#9ab2bd;--accent:#65debf;--warning:#ffca73;--danger:#ff828b}
+    *{box-sizing:border-box}html,body{min-height:100%}body{margin:0;background:radial-gradient(ellipse at 20% -20%,#174c51 0%,transparent 47%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.48}
+    main{max-width:800px;margin:0 auto;padding:22px 16px max(40px,env(safe-area-inset-bottom))}.eyebrow{font-size:11px;letter-spacing:1.9px;text-transform:uppercase;color:var(--accent);font-weight:800}h1{font-size:clamp(25px,5vw,38px);line-height:1.1;margin:8px 0 12px}h2{font-size:17px;margin:0 0 12px}p{margin:0 0 12px;color:var(--muted)}strong{color:var(--text)}.hero{margin:12px 0 22px}.tag{display:inline-block;padding:6px 11px;border-radius:100px;background:#17433b;color:#b1ffe4;font-size:12px;font-weight:700;margin-top:5px}
+    .panel{border:1px solid var(--line);background:rgba(16,34,44,.96);padding:17px;border-radius:18px;margin-bottom:14px;box-shadow:0 8px 26px #00000014}.soft{border-radius:12px;background:var(--panel2);padding:12px;margin-top:10px}.row{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{padding:13px;background:var(--panel2);border-radius:12px}.stat .num{display:block;font-size:24px;font-weight:850;font-variant-numeric:tabular-nums}.stat small{font-size:11px;color:var(--muted)}.label{display:block;font-size:13px;color:var(--muted);margin:12px 0 7px}input,select{width:100%;padding:12px 11px;background:#071c25;color:var(--text);border:1px solid #3a5865;border-radius:11px;font-size:16px}input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}button{appearance:none;border:0;border-radius:12px;padding:13px 15px;font-size:15px;font-weight:800;cursor:pointer;touch-action:manipulation;background:var(--accent);color:#09221f}button:disabled{opacity:.35;cursor:not-allowed}.ghost{background:#29434e;color:var(--text)}.danger{background:#66343a;color:#ffe3e4}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.buttons button{flex:1;min-width:132px}.checkbox{display:flex;align-items:center;gap:10px;margin-top:12px;color:var(--text);font-size:13px}.checkbox input{width:19px;height:19px;accent-color:var(--accent);flex:none}.help{font-size:12px;color:var(--muted);margin-top:8px}.warn{border-left:3px solid var(--warning);padding:10px 12px;background:#372d22;border-radius:8px;color:#ffe2b2;font-size:13px}.success{color:var(--accent)}.dangerText{color:var(--danger)}progress{width:100%;height:12px;accent-color:var(--accent);margin:12px 0 0}.meter{font-variant-numeric:tabular-nums;font-size:30px;font-weight:850}#events{max-height:340px;overflow:auto;background:#071820;border-radius:12px;padding:12px;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere;white-space:pre-wrap;color:#c8dce3}#inventory{max-height:280px;overflow:auto;font:12px/1.6 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:#cce1e8}.step{font-size:12px;color:var(--accent);font-weight:750}.hidden{display:none}footer{color:var(--muted);font-size:12px;padding:18px 0 6px}a{color:#8ff0d5}@media(min-width:640px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <div class="eyebrow">BH BOXSTER PLUS II · G6177FD</div>
+    <h1>Diagnóstico Bluetooth automático</h1>
+    <p>Conecta tu dispositivo <strong>T01_XXXXX</strong>. En una sola sesión, esta herramienta identifica las interfaces Bluetooth permitidas, lee datos, captura notificaciones y prepara un informe para investigar el protocolo propietario.</p>
+    <span class="tag">Solo lectura · No modifica velocidad ni firmware</span>
+  </section>
+
+  <section class="panel">
+    <h2>01 · Preparar el análisis</h2>
+    <div id="support" class="soft">Comprobando navegador y conexión segura…</div>
+    <label class="label" for="duration">Tiempo de captura de notificaciones</label>
+    <select id="duration"><option value="30">30 segundos</option><option value="60" selected>60 segundos (recomendado)</option><option value="120">120 segundos</option></select>
+    <label class="label" for="extra">Servicios personalizados adicionales (opcional)</label>
+    <input id="extra" placeholder="Ej.: 0xFFF0, 72d70001-501f-..." autocomplete="off" spellcheck="false">
+    <p class="help">Se solicitan permisos para FTMS (1826), información del dispositivo (180A), batería (180F), pulso (180D), C100, servicios OEM comunes y Pafers. Para otros UUID, escríbelos antes de conectar; el navegador solo permite consultar los servicios autorizados.</p>
+    <label class="checkbox"><input type="checkbox" id="descriptors" checked> Inspeccionar descriptores GATT y leer los que sean accesibles (sin escribir)</label>
+    <div class="warn" style="margin-top:14px"><strong>Seguridad:</strong> deja la cinta detenida para el inventario inicial. El HTML nunca envía comandos de motor, inclinación, emparejamientos ocultos, desbloqueo ni actualizaciones. Si decides realizar observaciones con controles físicos durante la captura, hazlo sin subirte a la banda y con el paro de emergencia accesible.</div>
+    <div class="buttons">
+      <button id="start">Conectar y ejecutar todas las pruebas</button>
+      <button id="stop" class="danger" disabled>Detener</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="row"><h2>02 · Progreso</h2><span class="step" id="phase">Sin iniciar</span></div>
+    <div id="status">Esperando conexión.</div>
+    <progress id="progress" value="0" max="100"></progress>
+    <div class="grid" style="margin-top:13px">
+      <div class="stat"><span class="num" id="servicesCount">0</span><small>Servicios</small></div>
+      <div class="stat"><span class="num" id="charsCount">0</span><small>Características</small></div>
+      <div class="stat"><span class="num" id="readsCount">0</span><small>Lecturas</small></div>
+      <div class="stat"><span class="num" id="notifyCount">0</span><small>Notificaciones</small></div>
+    </div>
+    <div class="grid" style="margin-top:10px">
+      <div class="stat"><small>Velocidad FTMS observada</small><div class="meter" id="speed">—</div></div>
+      <div class="stat"><small>Inclinación FTMS observada</small><div class="meter" id="incline">—</div></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="row"><h2>03 · Inventario GATT</h2><span id="deviceName" class="step">Sin dispositivo</span></div>
+    <div id="inventory">Los servicios y sus características aparecerán aquí.</div>
+  </section>
+
+  <section class="panel">
+    <h2>04 · Registro cronológico</h2>
+    <div id="events" role="log" aria-live="polite">Todavía no hay eventos.</div>
+    <div class="buttons">
+      <button id="json" class="ghost">Exportar JSON</button>
+      <button id="txt" class="ghost">Exportar TXT</button>
+    </div>
+    <p class="help">Los resultados se generan localmente en el teléfono. La página no envía ni sube información a ningún servidor. Los identificadores del dispositivo pueden ser únicos: revisa el informe antes de compartirlo.</p>
+  </section>
+
+  <footer>Herramienta de investigación GATT de solo lectura. No sustituye pruebas de seguridad del fabricante ni garantiza acceso a firmware, placa o control externo de velocidad. Web Bluetooth necesita un navegador compatible y un contexto seguro (HTTPS o localhost).</footer>
+</main>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const WAIT_BETWEEN_GATT_MS = 80;
+const BASE_SERVICES = [0x1826,0x180A,0x180F,0x180D,0xC100,0xFFF0,0xFFF1,0xFFE0,0xFE59,'72d70001-501f-46f7-95f9-23846ee1aba3','00001530-1212-efde-1523-785feabcd123'];
+const SERVICE_NAMES = {'1826':'Fitness Machine (FTMS)','180a':'Device Information','180f':'Battery','180d':'Heart Rate','c100':'OEM privado C100','fff0':'OEM FFF0','fff1':'OEM FFF1','ffe0':'OEM FFE0','fe59':'Secure DFU (posible)','72d70001-501f-46f7-95f9-23846ee1aba3':'Pafers (posible)','00001530-1212-efde-1523-785feabcd123':'Nordic Legacy DFU (posible)'};
+const CHAR_NAMES = {'2acc':'FTMS características','2acd':'FTMS datos cinta','2ad3':'FTMS estado entrenamiento','2ad4':'FTMS rango velocidad','2ad5':'FTMS rango inclinación','2ad9':'FTMS punto de control (NO ESCRIBIR)','2ada':'FTMS estado máquina','2a19':'Batería','2a24':'Modelo','2a25':'Número de serie','2a26':'Firmware','2a27':'Revisión hardware','2a28':'Revisión software','2a29':'Fabricante','c111':'OEM C111','c112':'OEM C112'};
+const safeJson = obj => JSON.stringify(obj,null,2);
+let device=null, server=null, aborted=false, currentReport=null, logLines=[], listeners=[], timerHandle=null;
+let stats={services:0,chars:0,reads:0,notifications:0,errors:0};
+function shortUuid(u){let s=String(u).toLowerCase();const m=/^0000([0-9a-f]{4})-0000-1000-8000-00805f9b34fb$/.exec(s);return m?m[1]:s;}
+function bytesOf(v){return Array.from(new Uint8Array(v.buffer,v.byteOffset,v.byteLength));}
+function hexOf(arr){return arr.map(x=>x.toString(16).padStart(2,'0')).join(' ').toUpperCase();}
+function stamp(){return new Date().toISOString();}
+function wait(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function makeReport(){return {tool:'BH Boxster II BLE Diagnostic',version:'1.0.2',readOnly:true,startedAt:stamp(),finishedAt:null,device:{name:null,id:null},environment:{ua:navigator.userAgent,secureContext:isSecureContext,webBluetooth:!!navigator.bluetooth,language:navigator.language,locationProtocol:location.protocol},permittedServices:[],services:[],events:[],warnings:[],errors:[],observations:{ftmsControlPointPresent:false,ftmsControlPointProperties:null,pafersServiceFound:false,oemC100Found:false,firmware:null,speedKmh:null,inclinePercent:null},stats:{...stats}};}
+function eventLog(message,level='info',extra){const entry={time:stamp(),level,message};if(extra!==undefined)entry.data=extra;if(currentReport&&currentReport.events.length<2400)currentReport.events.push(entry);logLines.push(`[${new Date().toLocaleTimeString('es-ES')}] ${level.toUpperCase()}: ${message}`);if(logLines.length>600)logLines.shift();$('events').textContent=logLines.slice(-260).join('\n');$('events').scrollTop=$('events').scrollHeight;}
+function markError(where,error){let text=(error?.name?error.name+': ':'')+(error?.message||String(error));stats.errors++;if(currentReport){currentReport.errors.push({time:stamp(),where,message:text});}eventLog(`${where}: ${text}`,'error');}
+function setPhase(phase,status,percent){$('phase').textContent=phase;$('status').textContent=status;$('progress').value=percent;}
+function syncCounts(){['services','chars','reads','notifications'].forEach((k,i)=>$( ['servicesCount','charsCount','readsCount','notifyCount'][i]).textContent=stats[k]);if(currentReport)currentReport.stats={...stats};}
+function normalizeCustom(raw){if(!raw.trim())return [];return raw.split(/[\s,;]+/).filter(Boolean).map(value=>{const x=value.trim().toLowerCase();if(/^0x[0-9a-f]{4}$/.test(x))return parseInt(x,16);if(/^[0-9a-f]{4}$/.test(x))return parseInt(x,16);if(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(x))return x;throw new Error(`UUID no válido: ${value}`);});}
+function renderInventory(){if(!currentReport)return;const lines=[];for(const service of currentReport.services){lines.push(`[${service.uuid}] ${service.name}`);for(const ch of service.characteristics){lines.push(`  ├─ ${ch.uuid} ${ch.name}`);lines.push(`  │  permisos: ${ch.properties.join(', ')||'ninguno declarado'}`);if(ch.read)lines.push(`  │  lectura: ${ch.read.hex}${ch.read.decoded?' | '+safeJson(ch.read.decoded):''}`);if(ch.readError)lines.push(`  │  lectura no disponible: ${ch.readError}`);for(const d of ch.descriptors||[])lines.push(`  │    └─ desc. ${d.uuid}${d.hex?' | '+d.hex:''}${d.error?' | '+d.error:''}`);}}
+$('inventory').textContent=lines.join('\n')||'No se detectaron servicios permitidos.';}
+function decUtf8(bytes){return new TextDecoder('utf-8',{fatal:false}).decode(new Uint8Array(bytes)).replace(/\u0000+$/g,'');}
+function decodeTreadmill(v){const data=bytesOf(v);if(data.length<2)return {raw:hexOf(data),error:'trama incompleta'};const flags=v.getUint16(0,true);let offset=2;const result={flags:'0x'+flags.toString(16).padStart(4,'0')};function enough(n){return offset+n<=v.byteLength;}
+if(!(flags&1)&&enough(2)){result.speedKmh=+(v.getUint16(offset,true)/100).toFixed(2);offset+=2;}
+if(flags&2&&enough(2)){result.averageSpeedKmh=+(v.getUint16(offset,true)/100).toFixed(2);offset+=2;}
+if(flags&4&&enough(3)){result.distanceM=v.getUint8(offset)+(v.getUint8(offset+1)<<8)+(v.getUint8(offset+2)<<16);offset+=3;}
+if(flags&8&&enough(4)){result.inclinePercent=+(v.getInt16(offset,true)/10).toFixed(1);offset+=2;result.rampAngleDeg=+(v.getInt16(offset,true)/10).toFixed(1);offset+=2;}
+return result;}
+function decodeValue(uuid,v){const u=shortUuid(uuid),a=bytesOf(v);try{
+if(['2a24','2a25','2a26','2a27','2a28','2a29'].includes(u))return {text:decUtf8(a)};
+if(u==='2a19'&&a.length>=1)return {batteryPercent:a[0]};
+if(u==='2acd')return decodeTreadmill(v);
+if(u==='2acc'&&a.length>=8)return {machineFeaturesHex:hexOf(a.slice(0,4)),targetSettingFeaturesHex:hexOf(a.slice(4,8))};
+if(u==='2ad4'&&a.length>=6)return {minSpeedKmh:v.getUint16(0,true)/100,maxSpeedKmh:v.getUint16(2,true)/100,stepKmh:v.getUint16(4,true)/100};
+if(u==='2ad5'&&a.length>=6)return {minInclinePercent:v.getInt16(0,true)/10,maxInclinePercent:v.getInt16(2,true)/10,stepPercent:v.getUint16(4,true)/10};
+}catch(error){return {decodingError:error.message};}return null;}
+function useDecoded(uuid,decoded){if(!decoded)return;const u=shortUuid(uuid);if(u==='2a26'&&decoded.text)currentReport.observations.firmware=decoded.text;
+if(typeof decoded.speedKmh==='number'){currentReport.observations.speedKmh=decoded.speedKmh;$('speed').textContent=decoded.speedKmh.toFixed(2)+' km/h';}
+if(typeof decoded.inclinePercent==='number'){currentReport.observations.inclinePercent=decoded.inclinePercent;$('incline').textContent=decoded.inclinePercent.toFixed(1)+' %';}}
+async function readCharacteristic(characteristic,entry){if(aborted)return;if(!characteristic.properties.read)return;try{const val=await characteristic.readValue();const arr=bytesOf(val),decoded=decodeValue(characteristic.uuid,val);entry.read={time:stamp(),hex:hexOf(arr),size:arr.length,decoded};stats.reads++;useDecoded(characteristic.uuid,decoded);syncCounts();eventLog(`READ ${shortUuid(characteristic.uuid)} → ${hexOf(arr)}${decoded?' · '+JSON.stringify(decoded):''}`);}catch(e){entry.readError=e.name+': '+e.message;markError('READ '+shortUuid(characteristic.uuid),e);}await wait(WAIT_BETWEEN_GATT_MS);}
+async function inspectDescriptors(characteristic,entry){if(!$('descriptors').checked||aborted)return;try{const descriptors=await characteristic.getDescriptors();for(const d of descriptors){if(aborted)break;const item={uuid:shortUuid(d.uuid)};entry.descriptors.push(item);try{const val=await d.readValue();item.hex=hexOf(bytesOf(val));}catch(e){item.error=e.name+': '+e.message;}await wait(WAIT_BETWEEN_GATT_MS);}}catch(e){entry.descriptorEnumerationError=e.name+': '+e.message;}}
+function startCharacteristicNotifications(characteristic,entry){return (async()=>{if(aborted||!(characteristic.properties.notify||characteristic.properties.indicate))return;try{let sampleCount=0;const handler=(evt)=>{if(aborted||!currentReport)return;const val=evt.target.value;const raw=bytesOf(val);const decoded=decodeValue(characteristic.uuid,val);sampleCount++;stats.notifications++;entry.notificationCount=sampleCount;useDecoded(characteristic.uuid,decoded);
+if(sampleCount<=120){(entry.notifications||(entry.notifications=[])).push({time:stamp(),hex:hexOf(raw),decoded});}
+if(stats.notifications<=220)eventLog(`NOTIFY ${shortUuid(characteristic.uuid)} → ${hexOf(raw)}${decoded?' · '+JSON.stringify(decoded):''}`);
+if(stats.notifications%5===0||stats.notifications<=3)syncCounts();};
+characteristic.addEventListener('characteristicvaluechanged',handler);listeners.push({characteristic,handler});await characteristic.startNotifications();entry.notificationsEnabled=true;eventLog(`Notificaciones activadas: ${shortUuid(characteristic.uuid)}`);await wait(WAIT_BETWEEN_GATT_MS);}catch(e){entry.notificationsError=e.name+': '+e.message;markError('NOTIFY '+shortUuid(characteristic.uuid),e);}})();}
+async function stopListeners(){const old=listeners.slice();listeners=[];for(const {characteristic,handler} of old){try{characteristic.removeEventListener('characteristicvaluechanged',handler);}catch{}try{if(device?.gatt?.connected)await characteristic.stopNotifications();}catch{}}}
+function downloadReport(kind){if(!currentReport){alert('Inicia un diagnóstico para generar un informe.');return;}currentReport.stats={...stats};const out=kind==='json'?safeJson(currentReport):buildText();const filename=`BH_Boxster_G6177FD_BLE_${new Date().toISOString().replace(/[:.]/g,'-')}.${kind}`;const blob=new Blob([out],{type:kind==='json'?'application/json;charset=utf-8':'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);eventLog(`Informe ${kind.toUpperCase()} generado localmente`);}
+function buildText(){const r=currentReport;return [
+'BH BOXSTER PLUS II - DIAGNÓSTICO BLE SOLO LECTURA',`Inicio: ${r.startedAt}`,`Fin: ${r.finishedAt||'en curso'}`,`Dispositivo: ${r.device.name||'sin conectar'}`,`ID navegador: ${r.device.id||'—'}`,`Servicios autorizados: ${r.permittedServices.join(', ')}`,`Estadísticas: ${safeJson({...stats})}`,'','OBSERVACIONES',safeJson(r.observations),'','INVENTARIO',
+...r.services.flatMap(s=>[`${s.name} | ${s.uuid}`,...s.characteristics.flatMap(c=>[`  ${c.name} | ${c.uuid} [${c.properties.join(', ')}]`,`    lectura: ${c.read?c.read.hex:'—'}${c.read?.decoded?' '+safeJson(c.read.decoded):''}`,`    muestras: ${c.notificationCount||0}`,...(c.notifications||[]).map(n=>`      ${n.time}: ${n.hex}${n.decoded?' '+JSON.stringify(n.decoded):''}`)])]),'','ERROR',...r.errors.map(e=>`${e.time} ${e.where}: ${e.message}`),'','CRONOLOGÍA',...r.events.map(e=>`${e.time} ${e.level}: ${e.message}${e.data?' '+JSON.stringify(e.data):''}`)].join('\n');}
+async function cleanup(disconnect){await stopListeners();if(disconnect&&device?.gatt?.connected){try{device.gatt.disconnect();}catch{}}}
+function finishState(msg,pct=100){if(currentReport){currentReport.finishedAt=stamp();currentReport.stats={...stats};renderInventory();}$('start').disabled=false;$('stop').disabled=true;$('extra').disabled=false;$('duration').disabled=false;$('descriptors').disabled=false;setPhase('Completado',msg,pct);}
+function validateExtras(){try{return normalizeCustom($('extra').value);}catch(e){alert(e.message);return null;}}
+async function execute(){if(!navigator.bluetooth||!isSecureContext){alert('Necesitas Chrome en Android y alojar esta página en HTTPS o localhost.');return;}const extras=validateExtras();if(extras===null)return;
+const services=[...new Map([...BASE_SERVICES,...extras].map(s=>[String(s).toLowerCase(),s])).values()];
+stats={services:0,chars:0,reads:0,notifications:0,errors:0};aborted=false;listeners=[];logLines=[];currentReport=makeReport();currentReport.permittedServices=services.map(s=>typeof s==='number'?'0x'+s.toString(16):s);$('events').textContent='';$('inventory').textContent='Iniciando…';$('speed').textContent='—';$('incline').textContent='—';$('deviceName').textContent='Esperando dispositivo';$('start').disabled=true;$('stop').disabled=false;$('extra').disabled=true;$('duration').disabled=true;$('descriptors').disabled=true;syncCounts();
+setPhase('1/5 — Selección','Selecciona T01_XXXXX en el cuadro Bluetooth del navegador.',5);eventLog('Inicio · modo SOLO LECTURA');
+try{
+// Must happen within the direct click activation (no await before this call).
+device=await navigator.bluetooth.requestDevice({acceptAllDevices:true,optionalServices:services});
+if(aborted){finishState('Cancelado',5);return;}
+currentReport.device.name=device.name||null;currentReport.device.id=device.id||null;$('deviceName').textContent=device.name||'Sin nombre';eventLog('Dispositivo seleccionado: '+(device.name||'sin nombre'));
+if(!/^T01_/i.test(device.name||'')){currentReport.warnings.push('Dispositivo seleccionado no comienza por T01_. Verifica que elegiste tu cinta.');eventLog('ATENCIÓN: el nombre no empieza por T01_','warning');}
+device.addEventListener('gattserverdisconnected',()=>{eventLog('Dispositivo BLE desconectado','warning');if(!aborted&&$('stop').disabled===false){aborted=true;finishState('Bluetooth desconectado; informe parcial disponible',100);}});
+setPhase('2/5 — GATT','Conectando y descubriendo servicios autorizados…',15);server=await device.gatt.connect();if(aborted)throw new Error('Detenido por el usuario');
+let serviceList=[];try{serviceList=await server.getPrimaryServices();}catch(e){markError('Listado de servicios',e);}
+if(!serviceList.length){for(const id of services){if(aborted)break;try{let svc=await server.getPrimaryService(id);if(!serviceList.some(x=>x.uuid===svc.uuid))serviceList.push(svc);}catch(e){/* Service absent or not permitted. */}await wait(WAIT_BETWEEN_GATT_MS);}}
+serviceList.sort((a,b)=>shortUuid(a.uuid).localeCompare(shortUuid(b.uuid)));stats.services=serviceList.length;syncCounts();eventLog(`Servicios accesibles: ${stats.services}`);
+const subscribers=[];
+for(let i=0;i<serviceList.length;i++){
+if(aborted)break;const svc=serviceList[i],key=shortUuid(svc.uuid);const sEntry={uuid:key,name:SERVICE_NAMES[key]||'Servicio sin identificar',characteristics:[]};currentReport.services.push(sEntry);
+if(key==='c100')currentReport.observations.oemC100Found=true;
+if(key==='72d70001-501f-46f7-95f9-23846ee1aba3')currentReport.observations.pafersServiceFound=true;
+setPhase(`3/5 — Servicio ${i+1}/${serviceList.length}`,`Examinando ${sEntry.name}…`,25+Math.round((i/Math.max(1,serviceList.length))*40));eventLog(`SERVICIO ${key} (${sEntry.name})`);
+let chars=[];try{chars=await svc.getCharacteristics();}catch(e){markError('Características '+key,e);sEntry.error=e.name+': '+e.message;continue;}
+for(const ch of chars){if(aborted)break;const cu=shortUuid(ch.uuid),pr=['broadcast','read','writeWithoutResponse','write','notify','indicate','authenticatedSignedWrites','reliableWrite','writableAuxiliaries'].filter(k=>ch.properties[k]===true);const e={uuid:cu,name:CHAR_NAMES[cu]||'Desconocida',properties:pr,descriptors:[],notificationCount:0};sEntry.characteristics.push(e);stats.chars++;syncCounts();eventLog(`CHAR ${cu} [${pr.join(', ')}]`);
+if(cu==='2ad9'){currentReport.observations.ftmsControlPointPresent=true;currentReport.observations.ftmsControlPointProperties=pr;}
+await readCharacteristic(ch,e);await inspectDescriptors(ch,e);
+if(ch.properties.notify||ch.properties.indicate)subscribers.push({ch,e});}
+renderInventory();}
+if(aborted)throw new Error('Detenido por el usuario');
+setPhase('4/5 — Notificaciones',`Suscribiéndose a ${subscribers.length} características…`,75);
+for(const {ch,e} of subscribers){if(aborted)break;await startCharacteristicNotifications(ch,e);}
+if(aborted)throw new Error('Detenido por el usuario');
+const sec=Math.max(1,Number($('duration').value));setPhase('5/5 — Captura',`Capturando ${sec} segundos. No se enviarán órdenes al motor.`,80);
+const until=Date.now()+sec*1000;let currentStage=-1;
+const stages=[
+  {until:.25,label:'Etapa A: reposo. Observar telemetría sin tocar la consola.'},
+  {until:.55,label:'Etapa B: si es seguro, cambiar MANUALMENTE velocidad con botones originales, cinta desocupada y supervisada.'},
+  {until:.85,label:'Etapa C: si es seguro, cambiar MANUALMENTE inclinación con botones originales, cinta desocupada y supervisada.'},
+  {until:1,label:'Etapa D: volver MANUALMENTE a reposo; se cierra la captura.'}
+];
+while(Date.now()<until&&!aborted&&device?.gatt?.connected){
+const remain=Math.max(0,Math.ceil((until-Date.now())/1000));const elapsed=1-remain/sec;
+const step=Math.max(0,stages.findIndex(x=>elapsed<x.until));
+if(step!==currentStage){currentStage=step;eventLog(stages[step].label,'stage');}
+setPhase('5/5 — Captura',`${stages[step].label} (${remain} s restantes)`,80+Math.round(elapsed*19));await wait(500);
+}
+if(!aborted){await cleanup(true);finishState(`Diagnóstico completado: ${stats.services} servicios, ${stats.chars} características, ${stats.notifications} notificaciones. Exporta el JSON.`,100);eventLog('FIN: se puede descargar el informe JSON y TXT');}
+else{await cleanup(true);finishState('Prueba interrumpida; informe parcial disponible',100);}
+}catch(e){if(!aborted&&e.name==='NotFoundError'){eventLog('No se seleccionó dispositivo.','warning');await cleanup(true);finishState('No se seleccionó dispositivo',5);return;}if(!aborted)markError('Sesión',e);await cleanup(true);finishState('Sesión finalizada; exporta el informe parcial y revisa errores',100);}}
+$('start').addEventListener('click',execute);
+$('stop').addEventListener('click',async()=>{aborted=true;setPhase('Deteniendo','Cerrando notificaciones y conexión…',$('progress').value);eventLog('Detención solicitada');await cleanup(true);finishState('Detenido por el usuario; informe parcial disponible',100);});
+$('json').addEventListener('click',()=>downloadReport('json'));
+$('txt').addEventListener('click',()=>downloadReport('txt'));
+(async()=>{const messages=[];if(!isSecureContext)messages.push('⚠️ Página sin origen seguro. Necesitas HTTPS o localhost.');if(!navigator.bluetooth)messages.push('⚠️ Web Bluetooth no está disponible. Usa Chrome compatible en Android.');if(isSecureContext&&navigator.bluetooth){messages.push('✓ Contexto seguro y Web Bluetooth detectados.');try{const av=await navigator.bluetooth.getAvailability();messages.push(av?'✓ Adaptador Bluetooth disponible.':'⚠️ Bluetooth no disponible; actívalo.');}catch{messages.push('Bluetooth detectado, pero no se pudo consultar disponibilidad.');}}
+$('support').textContent=messages.join(' ');})();
+</script>
+</body>
+</html>
